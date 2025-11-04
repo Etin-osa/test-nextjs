@@ -1,66 +1,56 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+
+import { useState } from "react";
+import Image from "next/image"
+import styles from "./page.module.scss";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
+    const [focus, setFocus] = useState(false)
+    const [inputValue, setInputValue] = useState("")
+
+    const checkStatus = () => {
+        return inputValue.length > 0 || focus
+    }
+
+    return (
+        <div>
+            <div 
+                className={styles.inputContainer}
+                style={{ padding: checkStatus() ? '.3rem' : '0' }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+                <div 
+                    className={styles.inputParent}
+                    style={{
+                        border: focus ? '2px solid #7871FF' : 'none',
+                        outline: focus? '3px solid #7871ff96' : '',
+                        padding: checkStatus() ? '.5rem 1rem' : '1rem'
+                    }}
+                >
+                    <div className={styles.inputLeft}>
+                        <div 
+                            style={{
+                                display: checkStatus() ? 'block' : 'none',
+                                color: '#7D77FF',
+                                fontSize: '12px'
+                            }}
+                        >
+                            Correo electronico
+                        </div>
+                        <input 
+                            className={styles.input} 
+                            placeholder="Escribe tu correo electronico"
+                            onChange={(e) => setInputValue(e.target.value)}
+                            onFocus={() => setFocus(true)}
+                            onBlur={() => setFocus(false)}
+                        />
+                    </div>
+                    <div className={styles.inputRight}>
+                        {checkStatus() && 
+                            <div style={{ backgroundColor: '#30305E'}}><span>X</span></div>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    );
 }
