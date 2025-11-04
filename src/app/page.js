@@ -22,7 +22,7 @@ export default function Home() {
                     style={{
                         border: focus ? '2px solid #7871FF' : 'none',
                         outline: focus? '3px solid #7871ff96' : '',
-                        padding: checkStatus() ? '.5rem 1rem' : '1rem'
+                        padding: checkStatus() ? '.7rem 1.5rem' : '1rem 1.5rem'
                     }}
                 >
                     <div className={styles.inputLeft}>
