@@ -44,7 +44,7 @@ export default function Home() {
                         />
                     </div>
                     <div className={styles.inputRight}>
-                        {checkStatus() && 
+                        {focus && 
                             <div style={{ backgroundColor: '#30305E'}}><span>X</span></div>
                         }
                     </div>
